@@ -1,0 +1,66 @@
+---
+title: "Reto_proyecto_lab04"
+author: "Ana Villaverde"
+date: "2025-01-04"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+    toc_float: TRUE
+    theme: journal
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(dplyr)
+library(kableExtra)
+library(DT)
+library(highcharter)
+```
+
+# Introducción
+En el presente proyecto se va a realizar un **análisis exploratorio** de datps, utilizando para ello *mtcars*. 
+Los objetivos a conseguir son los siguientes:
+
+  1. **Cargar** los datos.
+  2. Crear  **tablas**, tanto estáticas como interactivas para presentarlos.
+  3. Generar un **gráfico** que visualice relaciones entre variables.
+  4. **Personalizar** el aspecto del documento.
+
+# Análisis de datos
+
+## Carga de datos
+Los datos sobre los que se va a realizar el análisis están estructurados de la siguiente forma:
+```{r}
+data(mtcars)
+head(mtcars) %>% kbl(digits = c(2),
+                 row.names = FALSE,
+                 caption = "Previsualización de los datos a analizar") %>% 
+  kable_minimal()
+```
+
+Para una vista más extensa de los datos y poder realizar los filtros que se deseen se presenta la siguiente tabla:
+```{r}
+mtcars %>% DT::datatable(rownames = FALSE,
+                     caption = "Tabla de datos a analizar completa",
+                     filter = 'top')
+```
+
+## Visualización de los datos
+
+```{r}
+mtcars %>% 
+  mutate(cyl = as.factor(cyl)) %>% 
+  hchart("scatter", hcaes(x=cyl, y=mpg), color="darkblue") %>% 
+  hc_title(text="Relación entre número de cilindros y rendimiento") %>%
+  hc_xAxis(title = list(text = "Número de cilindros")) %>%
+  hc_yAxis(title = list(text = "Rendimiento (mpg)")) 
+    
+```
+
+# Conclusiones
+Tras realizar los gráficos y crear las tablas, se han alcanzado todos los objetivos presentados para el presente análisis.
+
+De este, teniendo en cuenta los datos mostrados en el gráfico, se puede observar que un número de cilindros superior (8) implica un menor rendimiento en términos de mpg, rondando entre los 10 a 19 mpg. Para 6 cilindros, este está de 17.5 a 22 mpg y para el menor número de cilindros, 4, estos varían de, aproximadamente, 21 a 34 mpg.
