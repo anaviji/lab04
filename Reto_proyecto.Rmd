@@ -21,7 +21,7 @@ library(highcharter)
 ```
 
 # Introducción
-En el presente proyecto se va a realizar un **análisis exploratorio** de datps, utilizando para ello *mtcars*. 
+En el presente proyecto se va a realizar un **análisis exploratorio** de datos, utilizando para ello *mtcars*. 
 Los objetivos a conseguir son los siguientes:
 
   1. **Cargar** los datos.
